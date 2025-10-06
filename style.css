@@ -1,0 +1,9 @@
+
+
+.fixed-navbar {
+    z-index: 1000;
+}
+
+main {
+    padding-top: 64px; 
+}

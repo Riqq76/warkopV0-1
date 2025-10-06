@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warkop51 - Kopi dan Komunitas Terbaik</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Konfigurasi warna kustom untuk kesan hangat
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'coffee-dark': '#4b3832', // Cokelat tua (Dasar)
+                        'coffee-light': '#efebe9', // Krem muda (Text/Background)
+                        'coffee-accent': '#ff9f1c', // Oranye hangat (Aksen Utama)
+                        'coffee-bg': '#f5f5f5', // Latar belakang krem muda
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'], // Gunakan Poppins
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+
+<body class="bg-coffee-bg font-sans">
+
+    <div id="login-screen" class="flex items-center justify-center h-screen bg-fixed bg-cover bg-center"
+        style="background-image: url('https://source.unsplash.com/1600x900/?cozy,coffee,shop');">
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+        <div
+            class="relative w-full max-w-md bg-white p-10 rounded-2xl shadow-2xl transition duration-500 transform hover:scale-[1.01] z-10">
+            <h2 class="text-4xl font-extrabold text-center mb-2 text-coffee-dark tracking-wide">Warkop51</h2>
+            <p class="text-center mb-8 text-gray-500 font-light">Masuk dan temukan tempat nongkrong favorit Anda.</p>
+            <form id="login-form">
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700 text-sm font-semibold mb-2">Username</label>
+                    <input type="text" id="username"
+                        class="w-full py-3 px-4 rounded-lg border-2 border-gray-300 focus:border-coffee-accent focus:ring-1 focus:ring-coffee-accent transition duration-150"
+                        value="pengguna" placeholder="Masukkan username">
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-gray-700 text-sm font-semibold mb-2">Password</label>
+                    <input type="password" id="password"
+                        class="w-full py-3 px-4 rounded-lg border-2 border-gray-300 focus:border-coffee-accent focus:ring-1 focus:ring-coffee-accent transition duration-150"
+                        value="123" placeholder="Masukkan password">
+                </div>
+                <button type="submit"
+                    class="bg-coffee-accent hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-xl w-full shadow-lg transition duration-200 transform hover:scale-[1.01]">
+                    Ngopi Dulu, Masuk Kemudian!
+                </button>
+                <p id="login-error" class="text-red-500 text-sm mt-4 hidden text-center font-medium">❌ Ups! Username atau password
+                    salah. Coba lagi ya.</p>
+            </form>
+        </div>
+    </div>
+
+    <div id="main-app" class="hidden">
+
+        <nav class="fixed-navbar fixed top-0 left-0 w-full bg-coffee-dark shadow-2xl z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="flex items-center justify-between h-20">
+                    <div class="flex items-center">
+                        <span class="text-3xl font-extrabold text-coffee-accent tracking-wider">Warkop51</span>
+                    </div>
+
+                    <div id="desktop-menu" class="hidden md:flex space-x-7 items-center">
+                        <a href="#" data-page="home"
+                            class="nav-link text-coffee-light hover:text-coffee-accent transition duration-150 font-semibold text-lg">Beranda</a>
+                        <a href="#" data-page="product"
+                            class="nav-link text-coffee-light hover:text-coffee-accent transition duration-150 font-semibold text-lg">Menu Kami</a>
+                        <a href="#" data-page="about"
+                            class="nav-link text-coffee-light hover:text-coffee-accent transition duration-150 font-semibold text-lg">Tentang</a>
+                        <a href="#" data-page="complaint"
+                            class="nav-link text-coffee-light hover:text-coffee-accent transition duration-150 font-semibold text-lg">Kritik & Saran</a>
+                        <a href="#" data-page="contact"
+                            class="nav-link text-coffee-light hover:text-coffee-accent transition duration-150 font-semibold text-lg">Kontak</a>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4">
+                        <a href="#" data-page="checkout"
+                            class="nav-link relative group hidden md:flex items-center text-white bg-green-600 hover:bg-green-700 py-2 px-5 rounded-full transition duration-300 font-semibold shadow-md">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            Keranjang
+                            <span id="cart-count"
+                                class="ml-2 bg-white text-green-600 text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">0</span>
+                        </a>
+
+                        <button id="logout-button"
+                            class="bg-red-500 hover:bg-red-600 text-white text-sm py-2 px-4 rounded-full shadow-md transition duration-200 hidden md:inline-block font-semibold">Keluar</button>
+
+                        <a href="#" data-page="checkout"
+                            class="nav-link relative md:hidden p-2 text-white hover:text-coffee-accent transition duration-300">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                                </path>
+                            </svg>
+                            <span id="cart-count-mobile"
+                                class="absolute top-0 right-0 bg-coffee-accent text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full hidden">0</span>
+                        </a>
+                        
+                        <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none p-2">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="md:hidden hidden bg-coffee-dark border-t border-gray-700 shadow-lg">
+                <a href="#" data-page="home"
+                    class="nav-link block px-4 py-3 text-base font-semibold text-white hover:bg-gray-700 hover:text-coffee-accent transition duration-150">Beranda</a>
+                <a href="#" data-page="product"
+                    class="nav-link block px-4 py-3 text-base font-semibold text-white hover:bg-gray-700 hover:text-coffee-accent transition duration-150">Menu Kami</a>
+                <a href="#" data-page="about"
+                    class="nav-link block px-4 py-3 text-base font-semibold text-white hover:bg-gray-700 hover:text-coffee-accent transition duration-150">Tentang Kami</a>
+                <a href="#" data-page="complaint"
+                    class="nav-link block px-4 py-3 text-base font-semibold text-white hover:bg-gray-700 hover:text-coffee-accent transition duration-150">Kritik & Saran</a>
+                <a href="#" data-page="contact"
+                    class="nav-link block px-4 py-3 text-base font-semibold text-white hover:bg-gray-700 hover:text-coffee-accent transition duration-150">Kontak</a>
+                <button id="mobile-logout-button"
+                    class="w-full text-left bg-red-500 hover:bg-red-600 text-white text-base font-bold py-3 px-4 mt-2 shadow-inner">Keluar</button>
+            </div>
+        </nav>
+
+        <main class="pt-24 pb-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div id="content-container">
+                    </div>
+            </div>
+        </main>
+
+        <footer class="bg-coffee-dark text-coffee-light text-center p-6 mt-12 shadow-inner">
+            <p class="text-sm font-light">Dibuat dengan cinta dan secangkir kopi hangat.</p>
+            <p class="text-lg font-bold">Warkop51 © 2025</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
